@@ -4,7 +4,7 @@
 module.exports = {
   siteMetadata: {
     title: `react-calculator-by-gatsby`,
-    siteUrl: `https://github.com/learnpytest/-react-calculator-by-gatsby`,
+    siteUrl: `https://rc-calculator-gatsby.netlify.app/`,
   },
   plugins: [
     "gatsby-plugin-styled-components",
