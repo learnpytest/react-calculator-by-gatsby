@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-// Component variables
-const LIMIT = Math.pow(2, 32);
-const OPERATORS = ["+", "-", "*", "/"];
-const getCalcState = () => ({
-  equation: "",
-  result: null,
-  isExceedLimit: false,
-});
+import { updateEquation, updateResult, clearAll } from "../functions/calculator.function"
 
 // styles
 const RcContainerStyle = styled.div`
@@ -90,10 +82,33 @@ const ExceedLimit = styled.span`
   color: var(--main-purple);
 `;
 
+// Component variables
+const LIMIT = Math.pow(2, 32);
+const OPERATORS = ["+", "-", "*", "/"];
+const getCalcState = () => ({
+    equation: "",
+    result: null,
+    isExceedLimit: false,
+});
+
+// Component function
+const handleCalculator = {
+    "UPDATE_EQUATION": (input, calc, setCalc, limit, type, isTargetValid) => updateEquation(input, calc, setCalc, limit, type, isTargetValid),
+    "UPDATE_RESULT": (calc, setCalc, operators, LIMIT) => updateResult(calc, setCalc, operators, LIMIT),
+    "CLEAR_ALL": (calcState, setCalc) => clearAll(calcState, setCalc)
+}
+
+const isTargetValid = (target1, blackList1, target2, blackList2=[]) => {
+    if (target2 === undefined) {
+        return !blackList1.includes(target1)
+    }
+    return !blackList1.includes(target1) || !blackList2.includes(target2)
+}
+
 const CalculatorComponent = () => {
   const calcState = getCalcState();
   const [calc, setCalc] = useState(calcState);
-
+  
   return (
     <RcContainerStyle>
       <RcContentStyle>
@@ -104,10 +119,8 @@ const CalculatorComponent = () => {
                 type="text"
                 readOnly
                 value={`Ans: ${
-                  calc.result ||
-                  11111111111111111111111111111111111111111111111111111111111111111111
+                  calc.result || 0
                 }`}
-                className="number"
               />
             </ResultStyle>
           </TextStyle>
@@ -116,10 +129,8 @@ const CalculatorComponent = () => {
               type="text"
               readOnly
               value={
-                calc.equation ||
-                11111111111111111111111111111111111111111111111111111111111111111111
+                calc.equation || 0
               }
-              className="number"
             />
           </TextStyle>
           {calc.isExceedLimit && <ExceedLimit>超過數字上限</ExceedLimit>}
@@ -127,24 +138,24 @@ const CalculatorComponent = () => {
         {OPERATORS.map((operator, index) => {
           return (
             <HatchStyle key={index}>
-              <ButtonStyle>
+                  <ButtonStyle onClick={() => handleCalculator["UPDATE_EQUATION"](operator, calc, setCalc, LIMIT, "operator", isTargetValid(calc.equation.slice(-1), OPERATORS))}>
                 <span class={`operator-text-${index}`}>{operator}</span>
               </ButtonStyle>
             </HatchStyle>
           );
         })}
         <HatchStyle>
-          <ButtonStyle>C</ButtonStyle>
+                  <ButtonStyle onClick={() => handleCalculator["CLEAR_ALL"](calcState, setCalc)}>C</ButtonStyle>
         </HatchStyle>
         <HatchStyle>
-          <ButtonStyle>=</ButtonStyle>
+                  <ButtonStyle onClick={() => handleCalculator["UPDATE_RESULT"](calc, setCalc, OPERATORS, LIMIT)}>=</ButtonStyle>
         </HatchStyle>
         {Array(10)
           .fill(0)
           .map((_, index) => {
             return (
               <HatchStyle key={index}>
-                <ButtonStyle>
+                    <ButtonStyle onClick={() => handleCalculator["UPDATE_EQUATION"](index, calc, setCalc, LIMIT, "digit", isTargetValid(calc.equation.slice(-1), ["0"], calc.equation.slice(-2, -1), OPERATORS))}>
                   <span class={`digit-text-${index}`}>{index}</span>
                 </ButtonStyle>
               </HatchStyle>
