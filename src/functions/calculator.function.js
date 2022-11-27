@@ -91,7 +91,6 @@ function createCalculator() {
           currentOperator
         );
       }
-      console.log({ currentResult, limit });
       if (isExceedLimit(Number(currentResult), limit)) {
         return "EXCEED-LIMIT";
       }

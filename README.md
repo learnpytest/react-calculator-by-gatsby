@@ -20,36 +20,36 @@
 
 ## 安裝
 
-### 需 Node 18 以上版本
+### 需使用 Node 18 以上版本
 
-    ```shell
-    # 查詢 Node 版本
-    nvm list
+```shell
+# 查詢 Node 版本
+nvm list
 
-    # 安裝 Node 18 以上版本，專案使用 19.1.0
-    nvm install 19.1.0
+# 安裝 Node 18 以上版本，專案使用 19.1.0
+nvm install 19.1.0
 
-    # 安裝以後使用
-    nvm use 19.1.0
-    ```
+# 安裝以後使用
+nvm use 19.1.0
+```
 
 ### 安裝專案
 
-    ```shell
-    # 下載專案進入資料夾
-    git clone https://github.com/learnpytest/react-calculator-by-gatsby.git
-    cd react-calculator-by-gatsby
+```shell
+# 下載專案進入資料夾
+git clone https://github.com/learnpytest/react-calculator-by-gatsby.git
+cd react-calculator-by-gatsby
 
-    # 安裝相關套件
-    npm install
-    ```
+# 安裝相關套件
+npm install
+```
 
 ### 開啟專案
 
-    ```shell
-    npm run develop
-    ```
-    Your site is now running at http://localhost:8000!
+```shell
+npm run develop
+```
+Your site is now running at http://localhost:8000!
 
 ## 使用說明
 
