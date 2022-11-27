@@ -1,0 +1,11 @@
+@import "../utilities/_variables.css";
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(to right, var(--main-red), var(--light-red));
+    font-family: var(--text-font-family);
+    color: var(--grey-extra-dark);
+}
