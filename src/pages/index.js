@@ -6,7 +6,7 @@ import "./index.css";
 import CalculatorComponent from "../components/calculator.component";
 
 const Home = () => {
-const size = useResize()
+  const size = useResize();
 
   return (
     <main>

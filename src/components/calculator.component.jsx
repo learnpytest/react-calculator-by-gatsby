@@ -38,7 +38,6 @@ const HatchStyle = styled.div`
     transform: translateY(6px);
   }
 `;
-
 const ButtonStyle = styled.button`
   position: absolute;
   top: 0;
@@ -60,13 +59,11 @@ const ButtonStyle = styled.button`
     }
   }
 `;
-
 const DisplayStyle = styled.div`
   padding: 10px;
   grid-column: 1 / -1;
   background-color: var(--light-blue-green);
 `;
-
 const TextStyle = styled.div`
   width: 100%;
   font-family: "IBM Plex Mono";
@@ -76,11 +73,9 @@ const ResultStyle = styled.div`
   width: 100%;
   border-bottom: 1px solid var(--main-blue-green);
 `;
-
 const ExceedLimitStyle = styled.span`
   color: var(--main-purple);
 `;
-
 const InputStyle = styled.input`
   width: 100%;
   border: none;
@@ -144,12 +139,13 @@ const CalculatorComponent = ({ windowSize }) => {
             return (
               <HatchStyle key={index}>
                 <ButtonStyle
-                        onClick={() =>  handleCalculator["UPDATE_EQUATION"](
+                  onClick={() =>
+                    handleCalculator["UPDATE_EQUATION"](
                       operator,
                       calc,
                       setCalc,
                       LIMIT,
-                      "operator",
+                      "operator"
                     )
                   }
                 >
@@ -185,13 +181,14 @@ const CalculatorComponent = ({ windowSize }) => {
               return (
                 <HatchStyle key={index + 1}>
                   <ButtonStyle
-                          onClick={() => handleCalculator["UPDATE_EQUATION"](
-                                  index + 1,
-                                  calc,
-                                  setCalc,
-                                  LIMIT,
-                                  "digit",
-                              )
+                    onClick={() =>
+                      handleCalculator["UPDATE_EQUATION"](
+                        index + 1,
+                        calc,
+                        setCalc,
+                        LIMIT,
+                        "digit"
+                      )
                     }
                   >
                     <span>{index + 1}</span>
@@ -201,12 +198,13 @@ const CalculatorComponent = ({ windowSize }) => {
             })}
           <HatchStyle>
             <ButtonStyle
-                  onClick={() => handleCalculator["UPDATE_EQUATION"](
+              onClick={() =>
+                handleCalculator["UPDATE_EQUATION"](
                   0,
                   calc,
                   setCalc,
                   LIMIT,
-                  "0",
+                  "0"
                 )
               }
             >

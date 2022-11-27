@@ -20,36 +20,36 @@
 
 ## 安裝
 
-### 需 Node 18 以上版本
+### 需使用 Node 18 以上版本
 
-    ```shell
-    # 查詢 Node 版本
-    nvm list
+```shell
+# 查詢 Node 版本
+nvm list
 
-    # 安裝 Node 18 以上版本，專案使用 19.1.0
-    nvm install 19.1.0
+# 安裝 Node 18 以上版本，專案使用 19.1.0
+nvm install 19.1.0
 
-    # 安裝以後使用
-    nvm use 19.1.0
-    ```
+# 安裝以後使用
+nvm use 19.1.0
+```
 
 ### 安裝專案
 
-    ```shell
-    # 下載專案進入資料夾
-    git clone https://github.com/learnpytest/react-calculator-by-gatsby.git
-    cd react-calculator-by-gatsby
+```shell
+# 下載專案進入資料夾
+git clone https://github.com/learnpytest/react-calculator-by-gatsby.git
+cd react-calculator-by-gatsby
 
-    # 安裝相關套件
-    npm install
-    ```
+# 安裝相關套件
+npm install
+```
 
 ### 開啟專案
 
-    ```shell
-    npm run develop
-    ```
-    Your site is now running at http://localhost:8000!
+```shell
+npm run develop
+```
+Your site is now running at http://localhost:8000!
 
 ## 使用說明
 
@@ -61,7 +61,7 @@
    - 按下「 = 」功能鍵後可以顯示「結果」，可以繼續輸入進行運算，或是按下 C 鍵清除所有運算重新輸入
    - 輸入、輸出限制: 
         - 不能輸入浮點數以及負數，但是支援浮點數或負數的計算並且顯示運算結果
-        - 運算規則會依照輸入的數字遇到運算子就依次執行計算，沒有乘除後加減的優先順序
+        - 運算規則會依照輸入的數字遇到運算子就依次執行計算，沒有先乘除後加減的優先順序
 
 ### 電腦版 (平板以上)
 
