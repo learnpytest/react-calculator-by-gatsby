@@ -2,18 +2,18 @@ import { limitChecker } from "./limit-checker.function";
 
 export const calculator = createCalculator();
 
-export const updateEquation = (input, calc, setCalc, limit, type, isTargetValid) => {
-  if (calc.isExceedLimit) return;
-  // input is an operator: no action if it's the first input or the previous and current input are both operators
-  if (
-    (type === "operator" && !calc.equation) ||
-    (type === "operator" && !isTargetValid)
-  )
-    return;
-  // input is an digit: no more digit input if the previous is operator and 0. ie: *00
-  if(type === "digit" && !isTargetValid) return
+export const updateEquation = (input, calc, setCalc, limit, type) => {
+  // validate
+  if (calc.isExceedLimit || !isValid(calc, type)) return;
+
+  if (type === "digit" && !calc.equation) {
+    setCalc({ ...calc, equation: `${input}` });
+  }
+
   // input is a digit or valid operator: if exceeds limit, notify it, if not, update equation at this place
-  limitChecker(input, limit, type) ? setCalc({ ...calc, isExceedLimit: true }) :  setCalc({ ...calc, equation: calc.equation + `${input}` });
+  limitChecker(input, limit, type)
+    ? setCalc({ ...calc, isExceedLimit: true })
+    : setCalc({ ...calc, equation: calc.equation + `${input}` });
 };
 
 export const updateResult = (calc, setCalc, operators, LIMIT) => {
@@ -120,4 +120,27 @@ function createCalculator() {
     currentVal = "";
     currentOperator = "";
   }
+}
+
+function isValid(calc, type) {
+  // 00、[+-/*]0 is not valid
+  if (type === "0") {
+    return (
+      calc.equation &&
+      (calc.equation.slice(-1) !== "0" ||
+        !/[+-/*]/.test(calc.equation.slice(-2, -1)))
+    );
+  }
+  // 0{0~9}、[+-/*]0{0~9} is not valid
+  if (type === "digit") {
+    return (
+      calc.equation.slice(-1) !== "0" ||
+      !/[+-/*]/.test(calc.equation.slice(-2, -1))
+    );
+  }
+  // input is an operator: no action if it's the first input or the previous and current input are both operators
+  else if (type === "operator") {
+    return !!calc.equation && !/[+-/*]/.test(calc.equation.slice(-1));
+  }
+  return true;
 }

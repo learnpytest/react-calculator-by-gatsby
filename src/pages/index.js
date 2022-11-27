@@ -1,17 +1,20 @@
-import * as React from "react"
+import React from "react";
+import useResize from "../functions/use-resize.function";
 import "normalize.css";
 import "./index.css";
 
-import CalculatorComponent from "../components/calculator.component"
+import CalculatorComponent from "../components/calculator.component";
 
 const Home = () => {
+const size = useResize()
+
   return (
     <main>
-      <CalculatorComponent />
+      <CalculatorComponent windowSize={size} />
     </main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
 
-export const Head = () => <title>Home Page</title>
+export const Head = () => <title>Home Page</title>;

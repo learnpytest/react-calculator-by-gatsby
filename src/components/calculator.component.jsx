@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import Draggable from "react-draggable";
 import {
   updateEquation,
   updateResult,
   clearAll,
 } from "../functions/calculator.function";
+import styled from "styled-components";
 
 // styles
 const RcContainerStyle = styled.div`
@@ -104,109 +105,117 @@ const getCalcState = () => ({
 
 // Component function
 const handleCalculator = {
-  UPDATE_EQUATION: (input, calc, setCalc, limit, type, isTargetValid) =>
-    updateEquation(input, calc, setCalc, limit, type, isTargetValid),
+  UPDATE_EQUATION: (input, calc, setCalc, limit, type) =>
+    updateEquation(input, calc, setCalc, limit, type),
   UPDATE_RESULT: (calc, setCalc, operators, LIMIT) =>
     updateResult(calc, setCalc, operators, LIMIT),
   CLEAR_ALL: (calcState, setCalc) => clearAll(calcState, setCalc),
 };
 
-const isTargetValid = (target1, blackList1, target2, blackList2 = []) => {
-  if (target2 === undefined) {
-    return !blackList1.includes(target1);
-  }
-  return !blackList1.includes(target1) || !blackList2.includes(target2);
-};
-
-const CalculatorComponent = () => {
+const CalculatorComponent = ({ windowSize }) => {
   const calcState = getCalcState();
   const [calc, setCalc] = useState(calcState);
 
   return (
-    <RcContainerStyle>
-      <RcContentStyle>
-        <DisplayStyle>
-          <TextStyle>
-            <ResultStyle>
-              <InputStyle
-                type="text"
-                readOnly
-                value={`Ans: ${calc.result || 0}`}
-              />
-            </ResultStyle>
-          </TextStyle>
-          <TextStyle>
-            <InputStyle type="text" readOnly value={calc.equation || 0} />
-          </TextStyle>
-          {calc.isExceedLimit && (
-            <ExceedLimitStyle>超過數字上限</ExceedLimitStyle>
-          )}
-        </DisplayStyle>
-        {OPERATORS.map((operator, index) => {
-          return (
-            <HatchStyle key={index}>
-              <ButtonStyle
-                onClick={() =>
-                  handleCalculator["UPDATE_EQUATION"](
-                    operator,
-                    calc,
-                    setCalc,
-                    LIMIT,
-                    "operator",
-                    isTargetValid(calc.equation.slice(-1), OPERATORS)
-                  )
-                }
-              >
-                <span>{operator}</span>
-              </ButtonStyle>
-            </HatchStyle>
-          );
-        })}
-        <HatchStyle>
-          <ButtonStyle
-            onClick={() => handleCalculator["CLEAR_ALL"](calcState, setCalc)}
-          >
-            C
-          </ButtonStyle>
-        </HatchStyle>
-        <HatchStyle>
-          <ButtonStyle
-            onClick={() =>
-              handleCalculator["UPDATE_RESULT"](calc, setCalc, OPERATORS, LIMIT)
-            }
-          >
-            =
-          </ButtonStyle>
-        </HatchStyle>
-        {Array(10)
-          .fill(0)
-          .map((_, index) => {
+    <Draggable
+      disabled={windowSize?.width < 992}
+      position={windowSize?.width < 992 ? { x: 0, y: 0 } : null}
+    >
+      <RcContainerStyle>
+        <RcContentStyle>
+          <DisplayStyle>
+            <TextStyle>
+              <ResultStyle>
+                <InputStyle
+                  type="text"
+                  readOnly
+                  value={`Ans: ${calc.result || 0}`}
+                />
+              </ResultStyle>
+            </TextStyle>
+            <TextStyle>
+              <InputStyle type="text" readOnly value={calc.equation || 0} />
+            </TextStyle>
+            {calc.isExceedLimit && (
+              <ExceedLimitStyle>超過數字上限</ExceedLimitStyle>
+            )}
+          </DisplayStyle>
+          {OPERATORS.map((operator, index) => {
             return (
               <HatchStyle key={index}>
                 <ButtonStyle
-                  onClick={() =>
-                    handleCalculator["UPDATE_EQUATION"](
-                      index,
+                        onClick={() =>  handleCalculator["UPDATE_EQUATION"](
+                      operator,
                       calc,
                       setCalc,
                       LIMIT,
-                      "digit",
-                      isTargetValid(
-                        calc.equation.slice(-1),
-                        ["0"],
-                        calc.equation.slice(-2, -1),
-                        OPERATORS
-                      )
+                      "operator",
                     )
                   }
                 >
-                  <span>{index}</span>
+                  <span>{operator}</span>
                 </ButtonStyle>
               </HatchStyle>
             );
           })}
-      </RcContentStyle>
-    </RcContainerStyle>
+          <HatchStyle>
+            <ButtonStyle
+              onClick={() => handleCalculator["CLEAR_ALL"](calcState, setCalc)}
+            >
+              C
+            </ButtonStyle>
+          </HatchStyle>
+          <HatchStyle>
+            <ButtonStyle
+              onClick={() =>
+                handleCalculator["UPDATE_RESULT"](
+                  calc,
+                  setCalc,
+                  OPERATORS,
+                  LIMIT
+                )
+              }
+            >
+              =
+            </ButtonStyle>
+          </HatchStyle>
+          {Array(9)
+            .fill(0)
+            .map((_, index) => {
+              return (
+                <HatchStyle key={index + 1}>
+                  <ButtonStyle
+                          onClick={() => handleCalculator["UPDATE_EQUATION"](
+                                  index + 1,
+                                  calc,
+                                  setCalc,
+                                  LIMIT,
+                                  "digit",
+                              )
+                    }
+                  >
+                    <span>{index + 1}</span>
+                  </ButtonStyle>
+                </HatchStyle>
+              );
+            })}
+          <HatchStyle>
+            <ButtonStyle
+                  onClick={() => handleCalculator["UPDATE_EQUATION"](
+                  0,
+                  calc,
+                  setCalc,
+                  LIMIT,
+                  "0",
+                )
+              }
+            >
+              <span>0</span>
+            </ButtonStyle>
+          </HatchStyle>
+        </RcContentStyle>
+      </RcContainerStyle>
+    </Draggable>
   );
 };
 
