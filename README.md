@@ -36,6 +36,8 @@
 
     ```shell
     # 下載專案進入資料夾
+    git clone https://github.com/learnpytest/react-calculator-by-gatsby.git
+    cd react-calculator-by-gatsby
 
     # 安裝相關套件
     npm install
