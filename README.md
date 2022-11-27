@@ -1,54 +1,54 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
 <h1 align="center">
-  Gatsby minimal starter
+  React Calculator By Gatsby
 </h1>
 
-## 🚀 Quick start
+簡易計算機可以支援基本運算例如加、減、乘、除運算。
 
-1.  **Create a Gatsby site.**
+- Demo
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+| Version | Compatibility | 
+| :-----| ----: |
+| 1.x | React 18、Node 18、Gatsby 5 | 
+ 
+**Getting Started**
+
+ - [安裝](#安裝)
+
+ - [使用說明](#使用方法)
+
+## 安裝
+    需 Node 18 以上版本
 
     ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
+    # 查詢 Node 版本
+    nvm list
+
+    # 安裝 Node 18 以上版本，專案使用 19.1.0
+    nvm install 19.1.0
+
+    # 安裝以後使用
+    nvm use 19.1.0
     ```
 
-2.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
+    安裝專案
 
     ```shell
-    cd my-gatsby-site/
+    # 下載專案進入資料夾
+
+    # 安裝相關套件
+    npm install
+    ```
+
+    開啟專案
+
+    ```shell
     npm run develop
     ```
-
-3.  **Open the code and start customizing!**
-
     Your site is now running at http://localhost:8000!
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+## 使用說明
 
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+    - 計算機包含 0 到 9 數字按鈕與 +、-、*、/ 運算子，按下按鈕可以在畫面上方即時顯示「算式」
+    - 按下 C 鍵清除所有運算
+    - 數字輸入與計算上限為 2^32，超過會顯示超過數字上限不能再輸入更多，按下 C 鍵清除所有運算重新輸入
+    - 按下「 = 」功能鍵後可以顯示「結果」，可以繼續輸入進行運算，或按下 C 鍵清除所有運算重新輸入
